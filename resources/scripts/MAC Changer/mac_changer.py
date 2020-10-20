@@ -33,8 +33,8 @@ def change_mac(interface, new_mac):
     subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
     subprocess.call(["ifconfig", interface, "up"])
 
-def validate(original, new_mac):
-    if original == new_mac:
+def validate(new_mac, requested_mac):
+    if new_mac == requested_mac:
         print("[+] MAC address was successfully changed to " + new_mac)
     else:
         print("[-] MAC address did not get changed.")
@@ -42,9 +42,10 @@ def validate(original, new_mac):
 def main():
     options = get_arguments()
     original_mac = get_current_mac(options.interface)
-    #print("Current MAC = " + str(current_mac))
+
     change_mac(options.interface, options.new_mac)
+
     new_mac = get_current_mac(options.interface)
-    validate(original_mac, new_mac)
+    validate(options.new_mac, new_mac)
 
 main()
