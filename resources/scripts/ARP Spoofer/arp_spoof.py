@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import scapy.all as scapy
 import sys
 import argparse 
